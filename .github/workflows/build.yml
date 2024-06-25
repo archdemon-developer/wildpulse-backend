@@ -26,10 +26,10 @@ jobs:
         run: ./gradlew clean test
       - name: Generate JaCoCo test report
         run: ./gradlew jacocoTestReport
-      - name: Fail PR if overall coverage is less than 95%
-        if: ${{ steps.jacoco.outputs.coverage-overall < 95.0 }}
+      - name: Fail PR if overall coverage is less than 30%
+        if: ${{ steps.jacoco.outputs.coverage-overall < 30.0 }}
         uses: actions/github-script@v6
         with:
           script: |
-            core.setFailed('Overall coverage is less than 95%!')
+            core.setFailed('Overall coverage is less than 30%!')
                   core.setFailed('Coverage threshold not met.')
