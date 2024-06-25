@@ -1,0 +1,52 @@
+name: wp-quality-checks
+on:
+  pull_request:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  wp-quality-checks:
+    name: Wildpulse quality checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x ./gradlew
+      - name: Run clean and build
+        run: ./gradlew clean build --refresh-dependencies
+      - name: Run spotless check
+        run: ./gradlew spotlessCheck
+      - name: Run unit tests
+        run: ./gradlew clean test
+      - name: Generate JaCoCo test report
+        run: ./gradlew jacocoTestReport
+      - name: Check code coverage
+        id: jacoco
+        run: |
+                echo "Coverage check"
+                coverage=$(sed -n 's/^Overall coverage: \([0-9]*\.[0-9]*%\).*$/\1/p' build/reports/jacoco/test/jacocoTestReport.xml | tr -d '%')
+                echo "::set-output name=coverage::${coverage}"
+      - name: Fail PR if overall coverage is less than 95%
+        if: ${{ steps.jacoco.outputs.coverage < 95.0 }}
+        uses: actions/github-script@0.10.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+                  github.workflow.runs.create({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    head_sha: context.sha,
+                    status: "completed",
+                    conclusion: "failure",
+                    output: {
+                      title: "Coverage check failed",
+                      summary: "Overall coverage is less than 95% (${steps.jacoco.outputs.coverage}%)"
+                    }
+                  })
+                  core.setFailed('Coverage threshold not met.')
