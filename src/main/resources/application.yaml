@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: wildpulse-backend
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/wildpulse_db
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      show-sql: true
+      format_sql: true
+    properties:
+      hibernate:
+        default_schema: wp_schema
+        dialect: org.hibernate.dialect.PostgreSQLDialect

@@ -1,4 +1,4 @@
-package com.wildpulse.backend.com.wildpulse.backend
+package com.wildpulse.backend
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
