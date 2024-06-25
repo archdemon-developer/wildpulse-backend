@@ -6,4 +6,6 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class WidpulseBackendApplication
 
-fun main(args: Array<String>) { runApplication<WidpulseBackendApplication>(*args) }
+fun main(args: Array<String>) {
+  runApplication<WidpulseBackendApplication>(*args)
+}
