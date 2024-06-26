@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/users")
 class WPUserController {
 
-    @GetMapping("/health-check")
-    @ResponseStatus(HttpStatus.OK)
-    fun healthCheck(): String = "API is working";
-
+  @GetMapping("/health-check")
+  @ResponseStatus(HttpStatus.OK)
+  fun healthCheck(): String = "API is working";
 }
