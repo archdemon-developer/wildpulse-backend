@@ -26,10 +26,13 @@ jobs:
         run: ./gradlew clean test
       - name: Generate JaCoCo test report
         run: ./gradlew jacocoTestReport
-      - name: Fail PR if overall coverage is less than 30%
-        if: ${{ steps.jacoco.outputs.coverage-overall < 30.0 }}
-        uses: actions/github-script@v6
+      - name: Code coverage check
+        uses: cicirello/jacoco-badge-generator@v2
         with:
-          script: |
-            core.setFailed('Overall coverage is less than 30%!')
-                  core.setFailed('Coverage threshold not met.')
+          generate-branches-badge: true
+          jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
+          generate-coverage-badge: true
+          coverage-badge-filename: jacoco.svg
+          branches-badge-filename: branches.svg
+          fail-if-coverage-less-than: 0.3
+          fail-if-branches-less-than: 0.3
