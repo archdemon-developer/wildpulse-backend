@@ -11,12 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @SpringBootTest
-@SpringJUnitConfig
 public class WPExceptionHandlerTests {
 
     @Autowired private WPExceptionHandler wpExceptionHandler;
