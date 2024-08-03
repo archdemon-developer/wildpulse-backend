@@ -36,19 +36,19 @@ First, clone this project using git, and navigate into the project folder:
 Then, install the required dependencies
 
 ```bash
-  ./mvnw clean install
+  mvn clean install
 ```
 
 That's it! Start the server using
 
 ```bash
-  ./mvnw spring-boot:run
+  mvn spring-boot:run
 ```
 
 Build the project using
 
 ```bash
-  ./mvnw clean build
+  mvn clean build
 ```
 
 ## Running Tests
@@ -56,13 +56,13 @@ Build the project using
 This project uses Vitest for unit testing. To run the tests, run the following command:
 
 ```bash
-  ./mvnw clean test
+  mvn clean test
 ```
 
 If you want to see your test coverage(this project uses Jacoco), then run:
 
 ```bash
-  ./mvnw clean verify
+  mvn clean verify
 ```
 
 ## Formatting
@@ -70,7 +70,7 @@ If you want to see your test coverage(this project uses Jacoco), then run:
 For formatting the code (the project uses spotless), run:
 
 ```bash
-  ./mvnw spotless:apply
+  mvn spotless:apply
 ```
 
 ## Roadmap

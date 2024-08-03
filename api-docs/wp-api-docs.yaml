@@ -1,0 +1,116 @@
+openapi: 3.0.1
+info:
+  title: Wildpulse Backend API
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /wp-users:
+    post:
+      tags:
+        - wp-user-controller
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WPUserRequest"
+        required: true
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WPErrorResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WPErrorResponse"
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WPUserResponse"
+  /wp-users/{userId}:
+    get:
+      tags:
+        - wp-user-controller
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WPErrorResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/WPErrorResponse"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WPUserResponse"
+components:
+  schemas:
+    WPErrorDetails:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          enum:
+            - WP_DB_DUP_ERROR
+            - WP_REC_NOT_FOUND_ERROR
+            - WP_VALIDATION_ERROR
+        message:
+          type: string
+    WPErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/WPErrorDetails"
+    WPUserRequest:
+      required:
+        - email
+      type: object
+      properties:
+        userName:
+          type: string
+        firstName:
+          pattern: "^[A-Za-z]+$"
+          type: string
+        lastName:
+          pattern: "^[A-Za-z]+$"
+          type: string
+        email:
+          type: string
+    WPUserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
