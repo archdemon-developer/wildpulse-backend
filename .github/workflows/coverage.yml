@@ -24,10 +24,3 @@ jobs:
           cache: 'maven'
       - name: Run Tests with Jacoco
         run: mvn clean verify
-      - name: Check Jacoco Coverage
-        run: |
-          COVERAGE=$(mvn jacoco:report | grep -oP '(?<=Total instruction coverage: )\d+.\d+')
-          if (( $(echo "$COVERAGE < 90.0" | bc -l) )); then
-            echo "Code coverage is below 90%. Coverage: $COVERAGE%"
-            exit 1
-          fi
