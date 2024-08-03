@@ -8,18 +8,17 @@ import com.wildpulse.backend.models.errors.WPErrorResponse;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-@SpringBootTest
-@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
 public class WPExceptionHandlerTests {
 
-    @Autowired private WPExceptionHandler wpExceptionHandler;
+    @InjectMocks private WPExceptionHandler wpExceptionHandler;
 
     @Test
     public void testHandleDataIntegrityViolationException() {

@@ -7,19 +7,18 @@ import com.wildpulse.backend.models.requests.WPUserRequest;
 import com.wildpulse.backend.models.responses.WPUserResponse;
 import com.wildpulse.backend.services.WPUserService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
-@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
 public class WPUserControllerTests {
 
-    @MockBean private WPUserService wpUserService;
+    @Mock private WPUserService wpUserService;
 
-    @Autowired private WPUserController wpUserController;
+    @InjectMocks private WPUserController wpUserController;
 
     @Test
     public void testCreateUser() {

@@ -118,6 +118,7 @@
                 <exclude>**/config/*</exclude>
                 <exclude>**/models/**/*</exclude>
                 <exclude>**/enums/*</exclude>
+                <exclude>**/configurations/*</exclude>
                 <exclude>com/wildpulse/backend/WPBackendApplication.class</exclude>
               </excludes>
             </configuration>
@@ -132,6 +133,7 @@
                 <exclude>**/config/*</exclude>
                 <exclude>**/models/**/*</exclude>
                 <exclude>**/enums/*</exclude>
+                <exclude>**/configurations/*</exclude>
                 <exclude>com/wildpulse/backend/WPBackendApplication.class</exclude>
               </excludes>
               <rules>

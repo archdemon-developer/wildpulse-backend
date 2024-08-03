@@ -8,23 +8,23 @@ import com.wildpulse.backend.models.WPUser;
 import com.wildpulse.backend.models.requests.WPUserRequest;
 import com.wildpulse.backend.models.responses.WPUserResponse;
 import com.wildpulse.backend.repositories.WPUserRepository;
+import com.wildpulse.backend.services.impl.WPUserServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
-@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
 public class WPUserServiceTests {
 
-    @MockBean private WPUserRepository wpUserRepository;
+    @Mock private WPUserRepository wpUserRepository;
 
-    @Autowired private WPUserService wpUserService;
+    @InjectMocks private WPUserServiceImpl wpUserService;
 
     @Test
     public void testCreateUserMethodSuccessfulCreation() {

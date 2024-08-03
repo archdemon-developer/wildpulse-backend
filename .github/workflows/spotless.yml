@@ -22,4 +22,4 @@ jobs:
           java-version: '21'
           cache: 'maven'
       - name: Run Spotless Check
-        run: mvn spotless:checkk
+        run: mvn spotless:check
