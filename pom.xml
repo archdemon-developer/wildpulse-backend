@@ -115,11 +115,10 @@
             <phase>prepare-package</phase>
             <configuration>
               <excludes>
-                <exclude>**/config/*</exclude>
+                <exclude>**/configurations/*</exclude>
                 <exclude>**/models/**/*</exclude>
                 <exclude>**/enums/*</exclude>
-                <exclude>**/configurations/*</exclude>
-                <exclude>com/wildpulse/backend/WPBackendApplication.class</exclude>
+                <exclude>com/wildpulse/backend/WPBackendApplication*</exclude>
               </excludes>
             </configuration>
           </execution>
@@ -130,7 +129,6 @@
             </goals>
             <configuration>
               <excludes>
-                <exclude>**/config/*</exclude>
                 <exclude>**/models/**/*</exclude>
                 <exclude>**/enums/*</exclude>
                 <exclude>**/configurations/*</exclude>

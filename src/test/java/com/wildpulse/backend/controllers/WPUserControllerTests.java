@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import com.wildpulse.backend.models.requests.WPUserRequest;
 import com.wildpulse.backend.models.responses.WPUserResponse;
 import com.wildpulse.backend.services.WPUserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -20,36 +21,33 @@ public class WPUserControllerTests {
 
     @InjectMocks private WPUserController wpUserController;
 
+    private long id;
+
+    @BeforeEach
+    public void setUp() {
+        id = 1L;
+    }
+
     @Test
     public void testCreateUser() {
-        WPUserRequest userToCreate =
-                new WPUserRequest("uname", "fname", "lname", "fname.lname@email.com");
+        WPUserRequest userToCreate = new WPUserRequest("uname", "fname.lname@email.com");
         WPUserResponse createdUserResponse =
-                new WPUserResponse(
-                        1,
-                        userToCreate.firstName() + " " + userToCreate.lastName(),
-                        userToCreate.userName(),
-                        userToCreate.email());
+                new WPUserResponse(id, userToCreate.getUserName(), userToCreate.getEmail());
         when(wpUserService.createUser(ArgumentMatchers.any(WPUserRequest.class)))
                 .thenReturn(createdUserResponse);
         WPUserResponse receivedResponse = wpUserController.createUser(userToCreate);
-        assertEquals(createdUserResponse.id(), receivedResponse.id());
-        assertEquals(createdUserResponse.userName(), receivedResponse.userName());
-        assertEquals(createdUserResponse.email(), receivedResponse.email());
-        assertEquals(createdUserResponse.name(), receivedResponse.name());
+        assertEquals(createdUserResponse.getId(), receivedResponse.getId());
+        assertEquals(createdUserResponse.getUserName(), receivedResponse.getUserName());
+        assertEquals(createdUserResponse.getEmail(), receivedResponse.getEmail());
     }
 
     @Test
     public void testGetUser() {
-        long userId = 1L;
-        WPUserResponse fetchUserResponse =
-                new WPUserResponse(1, "fname", "lname", "fname.lname@email.com");
-        when(wpUserService.getUserById(ArgumentMatchers.any(Long.class)))
-                .thenReturn(fetchUserResponse);
-        WPUserResponse receivedResponse = wpUserController.getUserById(userId);
-        assertEquals(fetchUserResponse.id(), receivedResponse.id());
-        assertEquals(fetchUserResponse.userName(), receivedResponse.userName());
-        assertEquals(fetchUserResponse.email(), receivedResponse.email());
-        assertEquals(fetchUserResponse.name(), receivedResponse.name());
+        WPUserResponse fetchUserResponse = new WPUserResponse(id, "uname", "fname.lname@email.com");
+        when(wpUserService.getUserById(ArgumentMatchers.anyLong())).thenReturn(fetchUserResponse);
+        WPUserResponse receivedResponse = wpUserController.getUserById(id);
+        assertEquals(fetchUserResponse.getId(), receivedResponse.getId());
+        assertEquals(fetchUserResponse.getUserName(), receivedResponse.getUserName());
+        assertEquals(fetchUserResponse.getEmail(), receivedResponse.getEmail());
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
-public class WPBackendConfigurations {
+public class WPMessageSourceConfigurations {
 
     @Value(WPDefaultConstants.WP_PROPERTY_MESSAGES_PATH)
     private String messageSourcePath;

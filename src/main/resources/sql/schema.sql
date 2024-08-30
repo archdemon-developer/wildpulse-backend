@@ -1,7 +1,7 @@
-create table wp_schema.tbl_users if not exists(
-    id serial not null,
-    name varchar(200),
-    username varchar(200),
-    email varchar(200) not null,
-    primary key(id)
+CREATE TABLE IF NOT EXISTS wp_schema.tbl_users (
+    id integer NOT NULL,
+    name VARCHAR(200),
+    username VARCHAR(200),
+    email VARCHAR(200) NOT NULL,
+    PRIMARY KEY (id)
 );

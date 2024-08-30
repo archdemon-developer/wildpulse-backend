@@ -27,9 +27,9 @@ public class WPExceptionHandlerTests {
         WPErrorResponse response =
                 wpExceptionHandler.handleDataIntegrityViolationException(exception);
         assertNotNull(response);
-        assertEquals(1, response.errors().size());
-        assertEquals(WPErrorCode.WP_DB_DUP_ERROR, response.errors().getFirst().errorCode());
-        assertEquals("Duplicate entry", response.errors().getFirst().message());
+        assertEquals(1, response.getErrors().size());
+        assertEquals(WPErrorCode.WP_DB_DUP_ERROR, response.getErrors().getFirst().getErrorCode());
+        assertEquals("Duplicate entry", response.getErrors().getFirst().getMessage());
     }
 
     @Test
@@ -37,9 +37,10 @@ public class WPExceptionHandlerTests {
         EntityNotFoundException exception = new EntityNotFoundException("Entity not found");
         WPErrorResponse response = wpExceptionHandler.handleEntityNotFoundException(exception);
         assertNotNull(response);
-        assertEquals(1, response.errors().size());
-        assertEquals(WPErrorCode.WP_REC_NOT_FOUND_ERROR, response.errors().getFirst().errorCode());
-        assertEquals("Entity not found", response.errors().getFirst().message());
+        assertEquals(1, response.getErrors().size());
+        assertEquals(
+                WPErrorCode.WP_REC_NOT_FOUND_ERROR, response.getErrors().getFirst().getErrorCode());
+        assertEquals("Entity not found", response.getErrors().getFirst().getMessage());
     }
 
     @Test
@@ -50,8 +51,9 @@ public class WPExceptionHandlerTests {
         WPErrorResponse response =
                 wpExceptionHandler.handleMethodArgumentNotValidException(exception);
         assertNotNull(response);
-        assertEquals(1, response.errors().size());
-        assertEquals(WPErrorCode.WP_VALIDATION_ERROR, response.errors().getFirst().errorCode());
-        assertEquals("must not be null", response.errors().getFirst().message());
+        assertEquals(1, response.getErrors().size());
+        assertEquals(
+                WPErrorCode.WP_VALIDATION_ERROR, response.getErrors().getFirst().getErrorCode());
+        assertEquals("must not be null", response.getErrors().getFirst().getMessage());
     }
 }

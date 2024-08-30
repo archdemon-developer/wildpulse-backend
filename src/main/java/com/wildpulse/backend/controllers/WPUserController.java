@@ -32,7 +32,9 @@ public class WPUserController {
         log.info(
                 "Entering create user controller method with request body: {} ",
                 wpUserRequest.toString());
-        return wpUserService.createUser(wpUserRequest);
+        WPUserResponse createdUserResponse = wpUserService.createUser(wpUserRequest);
+        log.info("User created successfully. response: {}", createdUserResponse.toString());
+        return createdUserResponse;
     }
 
     @GetMapping(
@@ -42,6 +44,8 @@ public class WPUserController {
     public WPUserResponse getUserById(
             @PathVariable(name = WPDefaultConstants.WP_VARIABLE_USER_ID) long userId) {
         log.info("Entering get user by id controller method with user id: {}", userId);
-        return wpUserService.getUserById(userId);
+        WPUserResponse userResponse = wpUserService.getUserById(userId);
+        log.info("User fetched successfully with id: {}", userId);
+        return userResponse;
     }
 }
