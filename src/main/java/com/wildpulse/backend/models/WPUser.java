@@ -15,11 +15,8 @@ public class WPUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, name = WPDBConstants.WP_FIELD_NAME_ID)
-    private long id;
-
-    @Column(name = WPDBConstants.WP_FIELD_NAME_NAME)
-    private String name;
+    @Column(name = WPDBConstants.WP_FIELD_NAME_ID, updatable = false, nullable = false)
+    private Long id;
 
     @Column(name = WPDBConstants.WP_FIELD_NAME_USERNAME)
     private String userName;

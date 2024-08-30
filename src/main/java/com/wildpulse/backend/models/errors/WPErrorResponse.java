@@ -1,5 +1,15 @@
 package com.wildpulse.backend.models.errors;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record WPErrorResponse(List<WPErrorDetails> errors) {}
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class WPErrorResponse {
+    List<WPErrorDetails> errors;
+}
