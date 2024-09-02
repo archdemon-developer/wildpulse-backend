@@ -7,8 +7,8 @@ import com.wildpulse.backend.repositories.WPUserRepository;
 import com.wildpulse.backend.services.WPUserService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -17,14 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class WPUserServiceImpl implements WPUserService {
 
     private final WPUserRepository wpUserRepository;
-
-    @Autowired
-    public WPUserServiceImpl(WPUserRepository wpUserRepository) {
-        this.wpUserRepository = wpUserRepository;
-    }
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
@@ -34,12 +30,16 @@ public class WPUserServiceImpl implements WPUserService {
         if (possibleDuplicateUser.isEmpty()) {
             WPUser wpUserToCreate =
                     WPUser.builder()
+                            .id(wpUserRequest.getId())
                             .email(wpUserRequest.getEmail())
                             .userName(wpUserRequest.getUserName())
+                            .emailVerified(wpUserRequest.isEmailVerified())
+                            .isSubscribed(true)
+                            .photoUrl(wpUserRequest.getPhotoUrl())
                             .build();
             WPUser createdWPUser = wpUserRepository.save(wpUserToCreate);
             return new WPUserResponse(
-                    createdWPUser.getId(), createdWPUser.getUserName(), createdWPUser.getEmail());
+                    createdWPUser.getId(), createdWPUser.getUserName(), createdWPUser.getEmail(), createdWPUser.isEmailVerified(), createdWPUser.getPhotoUrl(), createdWPUser.isSubscribed());
         } else {
             log.error(
                     "Exiting create user as app is trying to create a user with already existing email Id.");
@@ -61,6 +61,6 @@ public class WPUserServiceImpl implements WPUserService {
                                     "User with id: " + userId + " not found");
                         });
         return new WPUserResponse(
-                existingWPUser.getId(), existingWPUser.getUserName(), existingWPUser.getEmail());
+                existingWPUser.getId(), existingWPUser.getUserName(), existingWPUser.getEmail(), existingWPUser.isEmailVerified(), existingWPUser.getPhotoUrl(), existingWPUser.isSubscribed());
     }
 }

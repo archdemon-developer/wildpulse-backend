@@ -8,4 +8,7 @@ public class WPDBConstants {
     public static final String WP_FIELD_NAME_ID = "id";
     public static final String WP_FIELD_NAME_USERNAME = "username";
     public static final String WP_FIELD_NAME_EMAIL = "email";
+    public static final String WP_FIELD_NAME_EMAIL_VERIFIED = "email_verified";
+    public static final String WP_FIELD_NAME_PHOTO_URL = "photo_url";
+    public static final String WP_FIELD_NAME_IS_SUBSCRIBED = "is_subscribed";
 }

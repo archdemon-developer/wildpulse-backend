@@ -4,11 +4,11 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.2</version>
+    <version>3.3.3</version>
   </parent>
   <groupId>com.wildpulse.backend</groupId>
   <artifactId>wildpulse-backend</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.0.1-beta</version>
   <description>Backend Application for Wildpulse</description>
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
@@ -28,6 +28,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.wildpulse.commons</groupId>
+      <artifactId>wildpulse-commons</artifactId>
+      <version>0.0.1-beta</version>
     </dependency>
     <dependency>
       <groupId>org.postgresql</groupId>

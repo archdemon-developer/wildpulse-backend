@@ -5,4 +5,5 @@ public class WPAPIConstants {
 
     public static final String WP_FETCH_USER_BY_ID_PATH = "/{userId}";
     public static final String WP_BASE_USERS_PATH = "/wp-users";
+    public static final String WP_HEADER_KEY_AUTHORIZATION = "Authorization";
 }

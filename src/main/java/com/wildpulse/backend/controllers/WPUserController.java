@@ -5,25 +5,23 @@ import com.wildpulse.backend.constants.WPDefaultConstants;
 import com.wildpulse.backend.models.requests.WPUserRequest;
 import com.wildpulse.backend.models.responses.WPUserResponse;
 import com.wildpulse.backend.services.WPUserService;
+import com.wildpulse.commons.configurations.auth.Authenticated;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping(path = WPAPIConstants.WP_BASE_USERS_PATH)
-@Slf4j
+@RequiredArgsConstructor
 public class WPUserController {
 
     private final WPUserService wpUserService;
 
-    @Autowired
-    public WPUserController(WPUserService wpUserService) {
-        this.wpUserService = wpUserService;
-    }
-
+    @Authenticated
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -37,6 +35,7 @@ public class WPUserController {
         return createdUserResponse;
     }
 
+    @Authenticated
     @GetMapping(
             path = WPAPIConstants.WP_FETCH_USER_BY_ID_PATH,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,7 +44,7 @@ public class WPUserController {
             @PathVariable(name = WPDefaultConstants.WP_VARIABLE_USER_ID) long userId) {
         log.info("Entering get user by id controller method with user id: {}", userId);
         WPUserResponse userResponse = wpUserService.getUserById(userId);
-        log.info("User fetched successfully with id: {}", userId);
+        log.info("User fetched successfully: {}", userResponse);
         return userResponse;
     }
 }
