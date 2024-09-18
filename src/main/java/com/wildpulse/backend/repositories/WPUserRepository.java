@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WPUserRepository extends CrudRepository<WPUser, Long> {
+public interface WPUserRepository extends CrudRepository<WPUser, String> {
     Optional<WPUser> findByEmail(String email);
 }

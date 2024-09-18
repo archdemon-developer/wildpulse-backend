@@ -21,18 +21,18 @@ public class WPUserControllerTests {
 
     @InjectMocks private WPUserController wpUserController;
 
-    private long id;
+    private String id;
 
     @BeforeEach
     public void setUp() {
-        id = 1L;
+        id = "id";
     }
 
     @Test
     public void testCreateUser() {
-        WPUserRequest userToCreate = new WPUserRequest("uname", "fname.lname@email.com");
+        WPUserRequest userToCreate = new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", true);
         WPUserResponse createdUserResponse =
-                new WPUserResponse(id, userToCreate.getUserName(), userToCreate.getEmail());
+                new WPUserResponse(id, "uname", "fname.lname@email.com", false, "photoUrl", true);
         when(wpUserService.createUser(ArgumentMatchers.any(WPUserRequest.class)))
                 .thenReturn(createdUserResponse);
         WPUserResponse receivedResponse = wpUserController.createUser(userToCreate);
@@ -43,8 +43,8 @@ public class WPUserControllerTests {
 
     @Test
     public void testGetUser() {
-        WPUserResponse fetchUserResponse = new WPUserResponse(id, "uname", "fname.lname@email.com");
-        when(wpUserService.getUserById(ArgumentMatchers.anyLong())).thenReturn(fetchUserResponse);
+        WPUserResponse fetchUserResponse = new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", true);
+        when(wpUserService.getUserById(ArgumentMatchers.anyString())).thenReturn(fetchUserResponse);
         WPUserResponse receivedResponse = wpUserController.getUserById(id);
         assertEquals(fetchUserResponse.getId(), receivedResponse.getId());
         assertEquals(fetchUserResponse.getUserName(), receivedResponse.getUserName());

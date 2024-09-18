@@ -41,7 +41,7 @@ public class WPUserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public WPUserResponse getUserById(
-            @PathVariable(name = WPDefaultConstants.WP_VARIABLE_USER_ID) long userId) {
+            @PathVariable(name = WPDefaultConstants.WP_VARIABLE_USER_ID) String userId) {
         log.info("Entering get user by id controller method with user id: {}", userId);
         WPUserResponse userResponse = wpUserService.getUserById(userId);
         log.info("User fetched successfully: {}", userResponse);

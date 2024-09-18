@@ -50,7 +50,7 @@ public class WPUserServiceImpl implements WPUserService {
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-    public WPUserResponse getUserById(long userId) {
+    public WPUserResponse getUserById(String userId) {
         Optional<WPUser> wpUserOptional = wpUserRepository.findById(userId);
         WPUser existingWPUser =
                 wpUserOptional.orElseThrow(

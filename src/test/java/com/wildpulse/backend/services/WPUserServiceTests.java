@@ -27,22 +27,21 @@ public class WPUserServiceTests {
 
     @InjectMocks private WPUserServiceImpl wpUserService;
 
-    private long id;
+    private String id;
 
     @BeforeEach
     public void setUp() {
-        id = 1L;
+        id = "id";
     }
 
     @Test
     public void testCreateUserMethodSuccessfulCreation() {
         when(wpUserRepository.findByEmail(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.empty());
-        WPUserRequest userToCreate = new WPUserRequest("uname", "fname.lname@email.com");
-        WPUser createdUser = new WPUser(id, userToCreate.getUserName(), userToCreate.getEmail());
+        WPUserRequest userToCreate = new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
+        WPUser createdUser = new WPUser(id, userToCreate.getUserName(), userToCreate.getEmail(), false, "photoUrl", false);
         WPUserResponse createdUserResponse =
-                new WPUserResponse(
-                        createdUser.getId(), createdUser.getUserName(), createdUser.getEmail());
+                new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", true);;
         when(wpUserRepository.save(ArgumentMatchers.any(WPUser.class))).thenReturn(createdUser);
         WPUserResponse receivedResponse = wpUserService.createUser(userToCreate);
         assertEquals(createdUserResponse.getId(), receivedResponse.getId());
@@ -52,8 +51,8 @@ public class WPUserServiceTests {
 
     @Test
     public void testCreateUserAlreadyExists() {
-        WPUserRequest userToCreate = new WPUserRequest("uname", "fname.lname@email.com");
-        WPUser existingUser = new WPUser(id, userToCreate.getUserName(), userToCreate.getEmail());
+        WPUserRequest userToCreate = new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
+        WPUser existingUser = new WPUser(id, userToCreate.getUserName(), userToCreate.getEmail(), false, "photoUrl", false);
         when(wpUserRepository.findByEmail(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.of(existingUser));
         assertThrows(
@@ -63,11 +62,10 @@ public class WPUserServiceTests {
 
     @Test
     public void testGetUserById() {
-        WPUser foundUser = new WPUser(id, "uname", "fname.lname@email.com");
+        WPUser foundUser = new WPUser(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
         WPUserResponse foundUserResponse =
-                new WPUserResponse(
-                        foundUser.getId(), foundUser.getUserName(), foundUser.getEmail());
-        when(wpUserRepository.findById(ArgumentMatchers.anyLong()))
+                new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", false);;
+        when(wpUserRepository.findById(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.of(foundUser));
         WPUserResponse receivedResponse = wpUserService.getUserById(id);
         assertEquals(foundUserResponse.getId(), receivedResponse.getId());
@@ -77,7 +75,7 @@ public class WPUserServiceTests {
 
     @Test
     public void testGetUserByIdDoesNotExists() {
-        when(wpUserRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
+        when(wpUserRepository.findById(ArgumentMatchers.anyString())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> wpUserService.getUserById(id));
     }
 }

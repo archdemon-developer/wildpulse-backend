@@ -1,5 +1,6 @@
 package com.wildpulse.backend.configurations;
 
+import com.google.common.base.Utf8;
 import com.wildpulse.backend.constants.WPDefaultConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -19,7 +20,7 @@ public class WPMessageSourceConfigurations {
         ReloadableResourceBundleMessageSource messageSource =
                 new ReloadableResourceBundleMessageSource();
         messageSource.setBasename(messageSourcePath);
-        messageSource.setDefaultEncoding("UTF_8");
+        messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
 

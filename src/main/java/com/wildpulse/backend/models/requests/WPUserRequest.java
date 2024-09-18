@@ -13,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class WPUserRequest {
 
-    @NotBlank(message = WPDefaultConstants.WP_MESSAGE_PROPERTY_ID_NOTBLANK_ERROR)
     private String id;
 
     private String userName;
