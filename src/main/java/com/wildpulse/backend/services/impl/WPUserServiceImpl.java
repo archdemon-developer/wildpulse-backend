@@ -39,7 +39,12 @@ public class WPUserServiceImpl implements WPUserService {
                             .build();
             WPUser createdWPUser = wpUserRepository.save(wpUserToCreate);
             return new WPUserResponse(
-                    createdWPUser.getId(), createdWPUser.getUserName(), createdWPUser.getEmail(), createdWPUser.isEmailVerified(), createdWPUser.getPhotoUrl(), createdWPUser.isSubscribed());
+                    createdWPUser.getId(),
+                    createdWPUser.getUserName(),
+                    createdWPUser.getEmail(),
+                    createdWPUser.isEmailVerified(),
+                    createdWPUser.getPhotoUrl(),
+                    createdWPUser.isSubscribed());
         } else {
             log.error(
                     "Exiting create user as app is trying to create a user with already existing email Id.");
@@ -61,6 +66,11 @@ public class WPUserServiceImpl implements WPUserService {
                                     "User with id: " + userId + " not found");
                         });
         return new WPUserResponse(
-                existingWPUser.getId(), existingWPUser.getUserName(), existingWPUser.getEmail(), existingWPUser.isEmailVerified(), existingWPUser.getPhotoUrl(), existingWPUser.isSubscribed());
+                existingWPUser.getId(),
+                existingWPUser.getUserName(),
+                existingWPUser.getEmail(),
+                existingWPUser.isEmailVerified(),
+                existingWPUser.getPhotoUrl(),
+                existingWPUser.isSubscribed());
     }
 }

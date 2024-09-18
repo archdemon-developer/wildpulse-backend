@@ -30,7 +30,8 @@ public class WPUserControllerTests {
 
     @Test
     public void testCreateUser() {
-        WPUserRequest userToCreate = new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", true);
+        WPUserRequest userToCreate =
+                new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", true);
         WPUserResponse createdUserResponse =
                 new WPUserResponse(id, "uname", "fname.lname@email.com", false, "photoUrl", true);
         when(wpUserService.createUser(ArgumentMatchers.any(WPUserRequest.class)))
@@ -43,7 +44,8 @@ public class WPUserControllerTests {
 
     @Test
     public void testGetUser() {
-        WPUserResponse fetchUserResponse = new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", true);
+        WPUserResponse fetchUserResponse =
+                new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", true);
         when(wpUserService.getUserById(ArgumentMatchers.anyString())).thenReturn(fetchUserResponse);
         WPUserResponse receivedResponse = wpUserController.getUserById(id);
         assertEquals(fetchUserResponse.getId(), receivedResponse.getId());

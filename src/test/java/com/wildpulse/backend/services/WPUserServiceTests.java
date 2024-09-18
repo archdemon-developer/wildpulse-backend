@@ -38,10 +38,19 @@ public class WPUserServiceTests {
     public void testCreateUserMethodSuccessfulCreation() {
         when(wpUserRepository.findByEmail(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.empty());
-        WPUserRequest userToCreate = new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
-        WPUser createdUser = new WPUser(id, userToCreate.getUserName(), userToCreate.getEmail(), false, "photoUrl", false);
+        WPUserRequest userToCreate =
+                new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
+        WPUser createdUser =
+                new WPUser(
+                        id,
+                        userToCreate.getUserName(),
+                        userToCreate.getEmail(),
+                        false,
+                        "photoUrl",
+                        false);
         WPUserResponse createdUserResponse =
-                new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", true);;
+                new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", true);
+        ;
         when(wpUserRepository.save(ArgumentMatchers.any(WPUser.class))).thenReturn(createdUser);
         WPUserResponse receivedResponse = wpUserService.createUser(userToCreate);
         assertEquals(createdUserResponse.getId(), receivedResponse.getId());
@@ -51,8 +60,16 @@ public class WPUserServiceTests {
 
     @Test
     public void testCreateUserAlreadyExists() {
-        WPUserRequest userToCreate = new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
-        WPUser existingUser = new WPUser(id, userToCreate.getUserName(), userToCreate.getEmail(), false, "photoUrl", false);
+        WPUserRequest userToCreate =
+                new WPUserRequest(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
+        WPUser existingUser =
+                new WPUser(
+                        id,
+                        userToCreate.getUserName(),
+                        userToCreate.getEmail(),
+                        false,
+                        "photoUrl",
+                        false);
         when(wpUserRepository.findByEmail(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.of(existingUser));
         assertThrows(
@@ -62,9 +79,12 @@ public class WPUserServiceTests {
 
     @Test
     public void testGetUserById() {
-        WPUser foundUser = new WPUser(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
+        WPUser foundUser =
+                new WPUser(id, "uname", "fname.lname@email.com", false, "photoUrl", false);
         WPUserResponse foundUserResponse =
-                new WPUserResponse("id", "uname", "fname.lname@email.com", false, "photoUrl", false);;
+                new WPUserResponse(
+                        "id", "uname", "fname.lname@email.com", false, "photoUrl", false);
+        ;
         when(wpUserRepository.findById(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.of(foundUser));
         WPUserResponse receivedResponse = wpUserService.getUserById(id);

@@ -3,7 +3,6 @@ package com.wildpulse.backend.models.requests;
 import com.wildpulse.backend.constants.WPDefaultConstants;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 

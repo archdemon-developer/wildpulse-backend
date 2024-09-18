@@ -1,6 +1,5 @@
 package com.wildpulse.backend.configurations;
 
-import com.google.common.base.Utf8;
 import com.wildpulse.backend.constants.WPDefaultConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
