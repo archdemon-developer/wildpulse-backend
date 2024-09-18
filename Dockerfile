@@ -1,4 +1,4 @@
-# Use a multi-stage build to minimize the final image size
+# multi-stage build to minimize the final image size
 
 # Stage 1: Build the application
 FROM maven:3.9.8-eclipse-temurin-21-alpine as builder

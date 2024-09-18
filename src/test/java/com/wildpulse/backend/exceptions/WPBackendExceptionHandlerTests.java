@@ -3,8 +3,8 @@ package com.wildpulse.backend.exceptions;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.wildpulse.backend.exceptions.enums.WPErrorCode;
-import com.wildpulse.backend.models.errors.WPErrorResponse;
+import com.wildpulse.commons.exceptions.enums.WPErrorCode;
+import com.wildpulse.commons.models.errors.WPErrorResponse;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -16,9 +16,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @ExtendWith(MockitoExtension.class)
-public class WPExceptionHandlerTests {
+public class WPBackendExceptionHandlerTests {
 
-    @InjectMocks private WPExceptionHandler wpExceptionHandler;
+    @InjectMocks private WPBackendExceptionHandler wpExceptionHandler;
 
     @Test
     public void testHandleDataIntegrityViolationException() {

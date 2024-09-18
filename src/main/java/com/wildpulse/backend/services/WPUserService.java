@@ -6,5 +6,5 @@ import com.wildpulse.backend.models.responses.WPUserResponse;
 public interface WPUserService {
     WPUserResponse createUser(WPUserRequest wpUserRequest);
 
-    WPUserResponse getUserById(long userId);
+    WPUserResponse getUserById(String userId);
 }

@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,13 +13,21 @@ import lombok.*;
 public class WPUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = WPDBConstants.WP_FIELD_NAME_ID, updatable = false, nullable = false)
-    private Long id;
+    private String id;
 
     @Column(name = WPDBConstants.WP_FIELD_NAME_USERNAME)
     private String userName;
 
     @Column(name = WPDBConstants.WP_FIELD_NAME_EMAIL)
     private String email;
+
+    @Column(name = WPDBConstants.WP_FIELD_NAME_EMAIL_VERIFIED)
+    private boolean emailVerified;
+
+    @Column(name = WPDBConstants.WP_FIELD_NAME_PHOTO_URL)
+    private String photoUrl;
+
+    @Column(name = WPDBConstants.WP_FIELD_NAME_IS_SUBSCRIBED)
+    private boolean isSubscribed;
 }
